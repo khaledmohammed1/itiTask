@@ -2,6 +2,7 @@ package com.example.tvshowapp.activites;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -17,6 +18,7 @@ import com.example.tvshowapp.viewModels.MostPopularTVShowsViewModel;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity implements TvShowListener {
 
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements TvShowListener {
     private MostPopularTVShowsViewModel viewModel;
     private List<TVShow> tvShows = new ArrayList<>();
     private TVShowsAdapter tvShowsAdapter;
+
 
 
     @Override
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements TvShowListener {
         viewModel = new ViewModelProvider(this).get(MostPopularTVShowsViewModel.class);
         tvShowsAdapter = new TVShowsAdapter(tvShows,this);
         activityMainBinding.tvShowsRecyclerView.setAdapter(tvShowsAdapter);
+        activityMainBinding.imageSearch.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(),SearchActivity.class)));
         getMostPopularTvShows();
     }
 
